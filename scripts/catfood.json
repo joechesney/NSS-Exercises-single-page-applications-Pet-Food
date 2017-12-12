@@ -7,11 +7,11 @@
             "type": "all_natural",
             "volumes": [
               {
-                "name": "32oz",
+                "size": "32oz",
                 "price": 9.99
               },
               {
-                "name": "64oz",
+                "size": "64oz",
                 "price": 17.99
               }
             ]
@@ -20,11 +20,11 @@
             "type": "standard",
             "volumes": [
               {
-                "name": "58oz",
+                "size": "58oz",
                 "price": 12.99
               },
               {
-                "name": "72oz",
+                "size": "72oz",
                 "price": 21.99
               }
             ]
@@ -38,11 +38,11 @@
             "type": "puppy",
             "volumes": [
               {
-                "name": "16oz",
+                "size": "16oz",
                 "price": 8.99
               },
               {
-                "name": "24oz",
+                "size": "24oz",
                 "price": 14.99
               }
             ]
@@ -51,11 +51,11 @@
             "type": "standard",
             "volumes": [
               {
-                "name": "58oz",
+                "size": "58oz",
                 "price": 19.99
               },
               {
-                "name": "72oz",
+                "size": "72oz",
                 "price": 24.99
               }
             ]
