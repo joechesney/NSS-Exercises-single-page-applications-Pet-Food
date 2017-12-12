@@ -1,7 +1,12 @@
 "use strict";
 
 const printFood = function(foodObj){
-    let productTable = `<table><tr>`;
+    let pt = `<h2 class="center">Dog Food</h2><table class="center"><tr>`;
+    pt+=`<td>${foodObj[0].name}</td>`;
+    pt+=`<td><p>${foodObj[0].types[0].type}</p><div>${foodObj[0].types[0].volumes[0].size}: ${foodObj[0].types[0].volumes[0].price}</div><div>${foodObj[0].types[0].volumes[1].size}: ${foodObj[0].types[0].volumes[1].price}</div></td>`;
+
+
+    pt+=`<td><p>${foodObj[0].types[1].type}</p><div>${foodObj[0].types[1].volumes[0].size}: ${foodObj[0].types[1].volumes[0].price}</div><div>${foodObj[0].types[1].volumes[1].size}: ${foodObj[0].types[1].volumes[1].price}</div></td>`;
 //     this is a long ass list of logging through all the levels of the object
 //     vvv Definitely the dumbest waste of time I've ever had vvvv
 //     console.log(typeof foodObj);
@@ -46,8 +51,8 @@ const printFood = function(foodObj){
 
 
 
-
-    
+    pt+=`</tr><table>`;
+    return pt;
 
 };
 

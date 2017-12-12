@@ -8,9 +8,9 @@ let newXHR = new XMLHttpRequest();
 newXHR.addEventListener("load", function(){
 
     food = JSON.parse(this.responseText);
-    // for(let prop in food){
-    //     food=food[prop];
-    // }
+    for(let prop in food){
+        food=food[prop];
+    }
     let someBuilder = foodprinter.printFood(food);    
     console.log(someBuilder);
     outputBox.innerHTML = someBuilder;
