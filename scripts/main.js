@@ -11,9 +11,7 @@ newXHR.addEventListener("load", function(){
     // for(let prop in food){
     //     food=food[prop];
     // }
-    let someBuilder = "<table><tr>";
-    someBuilder+=foodprinter.printFood(food, someBuilder);
-    someBuilder += "</tr></table>";    
+    let someBuilder = foodprinter.printFood(food);    
     console.log(someBuilder);
     outputBox.innerHTML = someBuilder;
     // foodprinter.bestLoop(food);
