@@ -1,16 +1,32 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
-
-const printFood = function(foodObj){
+// I realize this is a pitiful way to code this. I worked on this for 2 days trying to automate a print loop that owuld work for both json files, without hard-coding anything. I failed to accomlish that, and wanted to be done with it. I wrote all this in about 2 hours. I will refactor it later. 
+const printDogFood = function(foodObj){
+    // heading
     let pt = `<h2 class="center">Dog Food</h2><table class="center"><tr>`;
-    pt+=`<td>${foodObj[0].name}</td>`;
-    pt+=`<td><p>${foodObj[0].types[0].type}</p><div>${foodObj[0].types[0].volumes[0].size}: ${foodObj[0].types[0].volumes[0].price}</div><div>${foodObj[0].types[0].volumes[1].size}: ${foodObj[0].types[0].volumes[1].price}</div></td>`;
+    // first column
+    pt+=`<td><h3>${foodObj[0].name}</h3></td>`;
+    pt+=`<td><p><strong>${foodObj[0].types[0].type}</strong></p><div>${foodObj[0].types[0].volumes[0].size}: ${foodObj[0].types[0].volumes[0].price}</div><div>${foodObj[0].types[0].volumes[1].size}: ${foodObj[0].types[0].volumes[1].price}</div><p></p></td>`;
 
-
-    pt+=`<td><p>${foodObj[0].types[1].type}</p><div>${foodObj[0].types[1].volumes[0].size}: ${foodObj[0].types[1].volumes[0].price}</div><div>${foodObj[0].types[1].volumes[1].size}: ${foodObj[0].types[1].volumes[1].price}</div></td>`;
-//     this is a long ass list of logging through all the levels of the object
-//     vvv Definitely the dumbest waste of time I've ever had vvvv
-//     console.log(typeof foodObj);
+    // second column
+    pt+=`<td><p><strong>${foodObj[0].types[1].type}</strong></p><div>${foodObj[0].types[1].volumes[0].size}: ${foodObj[0].types[1].volumes[0].price}</div><div>${foodObj[0].types[1].volumes[1].size}: ${foodObj[0].types[1].volumes[1].price}</div><p></p></td>`;
+    pt+=`</tr>`;
+    
+    // second row, first column
+    pt+=`<tr>`;
+    pt+=`<td><h3>${foodObj[1].name}</h3></td>`;
+    pt+=`<td><p><strong>${foodObj[1].types[0].type}</strong></p><div>${foodObj[1].types[0].volumes[0].size}: ${foodObj[1].types[0].volumes[0].price}</div><div>${foodObj[1].types[0].volumes[1].size}: ${foodObj[1].types[0].volumes[1].price}</div><p></p></td>`;
+    
+    // second row, second column
+    pt+=`<td><p><strong>${foodObj[1].types[1].type}</strong></p><div>${foodObj[1].types[1].volumes[0].size}: ${foodObj[1].types[1].volumes[0].price}</div><div>${foodObj[1].types[1].volumes[1].size}: ${foodObj[1].types[1].volumes[1].price}</div><p></p></td>`;
+    pt+=`</tr>`;
+    
+    // end of dog table
+    pt+=`</tr><table>`;
+    return pt;
+    //     this is a long ass list of logging through all the levels of the object
+    //     vvv Definitely the dumbest waste of time I've ever had vvvv
+    //     console.log(typeof foodObj);
 
 //     console.log("foodObj",foodObj); // array with 2 items, both objects
 //     console.log("foodObj[0]", foodObj[0]); // object with 2 properties: "name" and "types"
@@ -41,7 +57,7 @@ const printFood = function(foodObj){
 //     console.log("foodObj[0].types[1].volumes[1]",foodObj[0].types[0].volumes[1]);
 //     console.log("foodObj[0].types[1].volumes[1]",foodObj[0].types[1].volumes[0]);
 //     console.log("foodObj[0].types[1].volumes[1]",foodObj[0].types[1].volumes[1]);
-    
+
 //     // Purina
 //     console.log("foodObj[1].types[0].volumes[0]",foodObj[1].types[0].volumes[0]); // objects with 2 properties: "name", and "price"
 //     console.log("foodObj[1].types[1].volumes[1]",foodObj[1].types[0].volumes[1]);
@@ -52,16 +68,45 @@ const printFood = function(foodObj){
 
 
 
-    pt+=`</tr><table>`;
-    return pt;
 
 };
 
-//     function that checks the data type (array, or object, or string/number), 
-//     if its a string or number, log the value
-//     if its an array, then call the function again on each item in the array
-//     if its an object, then call the function again on each property of the object
-//     it wisely holds the property key of the current property in a variable called 'prevKey'
+
+const printCatFood = function(foodObj){
+    // heading
+    let pt = `<h2 class="center">Cat Food</h2><table class="center"><tr>`;
+    pt+=`<td><h3>${foodObj[0].name}</h3></td>`;
+
+    // first row, first column 
+    pt+=`<td><p><strong>Breeds</strong></p><p>${foodObj[0].breeds.join(", ")}</p>`;
+    
+    // first row, second column
+    pt+=`<td><p><strong>${foodObj[0].types[0].type}</strong></p><div>${foodObj[0].types[0].volumes[0].size}: ${foodObj[0].types[0].volumes[0].price}</div><div>${foodObj[0].types[0].volumes[1].size}: ${foodObj[0].types[0].volumes[1].price}</div><div>${foodObj[0].types[0].volumes[2].size}: ${foodObj[0].types[0].volumes[2].price}</div><p></p></td>`;
+
+
+    // first row, third column
+    pt+=`<td><p><strong>${foodObj[0].types[1].type}</strong></p><div>${foodObj[0].types[1].volumes[0].size}: ${foodObj[0].types[1].volumes[0].price}</div><div>${foodObj[0].types[1].volumes[1].size}: ${foodObj[0].types[1].volumes[1].price}</div><p></p></td>`;
+    pt+=`</tr>`;
+
+    pt+=`<tr>`;
+    pt+=`<td><h3>${foodObj[1].name}</h3></td>`;
+
+    // second row, first column
+    pt+=`<td><p><strong>Breeds</strong></p><p>${foodObj[1].breeds.join(", ")}</p>`;
+
+    // second row, second column
+    pt+=`<td><p><strong>${foodObj[1].types[0].type}</strong></p><div>${foodObj[1].types[0].volumes[0].size}: ${foodObj[1].types[0].volumes[0].price}</div><div>${foodObj[1].types[0].volumes[1].size}: ${foodObj[1].types[0].volumes[1].price}</div><p></p></td>`;
+
+
+    // second row, third column
+    pt+=`<td><p><strong>${foodObj[1].types[1].type}</strong></p><div>${foodObj[1].types[1].volumes[0].size}: ${foodObj[1].types[1].volumes[0].price}</div><div>${foodObj[1].types[1].volumes[1].size}: ${foodObj[1].types[1].volumes[1].price}</div><p></p></td>`;
+    pt+=`</tr>`;
+
+    // closes table
+    pt+=`</tr><table>`;
+    return pt;
+    
+};
 
 
 
@@ -71,28 +116,42 @@ const printFood = function(foodObj){
 
 
 
-
-module.exports = {printFood};
+module.exports = {printDogFood, printCatFood};
 },{}],2:[function(require,module,exports){
 "use strict";
 let foodprinter = require("./foodprinter");
-const outputBox = document.getElementById("output");
+const dogOutputBox = document.getElementById("dog-output");
+const catOutputBox = document.getElementById("cat-output");
 
 let food;
 
-let newXHR = new XMLHttpRequest();
-newXHR.addEventListener("load", function(){
+let dogXHR = new XMLHttpRequest();
+dogXHR.addEventListener("load", function(){
 
     food = JSON.parse(this.responseText);
     for(let prop in food){
         food=food[prop];
     }
-    let someBuilder = foodprinter.printFood(food);    
+    let someBuilder = foodprinter.printDogFood(food);    
     console.log(someBuilder);
-    outputBox.innerHTML = someBuilder;
+    dogOutputBox.innerHTML = someBuilder;
     // foodprinter.bestLoop(food);
 });
-newXHR.open("GET", "../scripts/dogfood.json");
-newXHR.send();
+dogXHR.open("GET", "../scripts/dogfood.json");
+dogXHR.send();
 
+let catXHR = new XMLHttpRequest();
+catXHR.addEventListener("load", function(){
+
+    food = JSON.parse(this.responseText);
+    for(let prop in food){
+        food=food[prop];
+    }
+    let someBuilder = foodprinter.printCatFood(food);    
+    console.log(someBuilder);
+    catOutputBox.innerHTML = someBuilder;
+    // foodprinter.bestLoop(food);
+});
+catXHR.open("GET", "../scripts/catfood.json");
+catXHR.send();
 },{"./foodprinter":1}]},{},[2]);

@@ -2,6 +2,7 @@
     "cat_brands": [
       {
         "name": "Purrina",
+        "breeds": ["Siamese", "Bengal", "Showshoe", "Munchkin"],
         "types": [
           {
             "type": "Kitten",
@@ -13,6 +14,10 @@
               {
                 "size": "32oz",
                 "price": 26.99
+              },
+              {
+                "size": "64oz",
+                "price": 34.99
               }
             ]
           },
@@ -33,6 +38,7 @@
       },
       {
         "name": "Meow Meal",
+        "breeds": ["Manx", "Egyptian Mau", "Himalayan", "Rag Doll"],
         "types": [
           {
             "type": "Kitten",
