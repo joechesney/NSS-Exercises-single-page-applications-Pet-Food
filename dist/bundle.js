@@ -1,9 +1,10 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 "use strict";
 
-module.exports.printFood = function(foodObj){
+let counter = 0;
+const printFood = function(foodObj, productsTable){
 //     this is a long ass list of logging through all the levels of the object
-
+//     vvv Definitely the dumbest waste of time I've ever had vvvv
 //     console.log(typeof foodObj);
 
 //     console.log("foodObj",foodObj); // array with 2 items, both objects
@@ -42,23 +43,63 @@ module.exports.printFood = function(foodObj){
 //     console.log("foodObj[0].types[1].volumes[1]",foodObj[1].types[1].volumes[0]);
 //     console.log("foodObj[0].types[1].volumes[1]",foodObj[1].types[1].volumes[1]);
 
-//     // The final step would just be adding ".name" and ".price" on every one of the above statements
+//     The final step would just be adding ".name" and ".price" on every one of the above 8 statements
 
 
-//     // function that checks the data type (array, or object, or string/number), 
-//     // if its a string or number, log the value
-//     // if its an array, then call the function again on each item in the array
-//     // if its an object, then call the function again on each property of the object
 
+// I need an 'if' statement that would check for the prevKey and depending on the key, create a different type of element and append it to the DOM
+// Place 'dog_brands' as a big header
+// key of 'name' will start a new row, and be in its own cell
+// keys of 'type', with associated 'volumes' will be in a cell together as <p> tags
+// somehow end the row???
     
+
+    // const HTMLbuilder = function(foodObj){
+        if(typeof foodObj === "string" || typeof foodObj === "number"){
+            console.log(prevKey);
+            if(prevKey === "name"){
+                productsTable+=`<td>${foodObj}</td>`;
+            } else if(prevKey === "type"){
+                productsTable+=`<p>${prevKey}</p>`;
+            } else if(prevKey === "size"){
+                productsTable+= `<p>${prevKey}</p>`;
+            } else if (prevKey === "price") {
+                productsTable+=`<p>${prevKey}</p>`;
+            }
+            return;
+        } else if(Array.isArray(foodObj)){
+            for(let i =0; i < foodObj.length; i++){
+                prevKey = foodObj;
+                printFood(foodObj[i]);
+            }
+        } else if(typeof foodObj === "object"){
+            for(let prop in foodObj){
+                prevKey = prop;
+                printFood(foodObj[prop]);
+            }
+        }
+    // };
+
+    counter++;
+    // HTMLbuilder(foodObj);
+    
+    console.log(counter);
+    return productsTable;
 };
 
-const testObj = {
-    "food": "pizza",
-    "chups": 4
-};
+//     function that checks the data type (array, or object, or string/number), 
+//     if its a string or number, log the value
+//     if its an array, then call the function again on each item in the array
+//     if its an object, then call the function again on each property of the object
+//     it wisely holds the property key of the current property in a variable called 'prevKey'
 let prevKey;
-let counter = 0;
+
+
+
+
+
+
+
 const bestLoop = function(obj) { // this is dope. need to figure out how to use this
     counter++;
     if(typeof obj === "string"){
@@ -84,11 +125,11 @@ const bestLoop = function(obj) { // this is dope. need to figure out how to use 
 
 // bestLoop(testObj);
 
-module.exports = {bestLoop};
+module.exports = {bestLoop, printFood};
 },{}],2:[function(require,module,exports){
 "use strict";
 let foodprinter = require("./foodprinter");
-
+const outputBox = document.getElementById("output");
 
 let food;
 
@@ -96,11 +137,15 @@ let newXHR = new XMLHttpRequest();
 newXHR.addEventListener("load", function(){
 
     food = JSON.parse(this.responseText);
-    for(let prop in food){
-        food=food[prop];
-    }
-    // foodprinter.printFood(food);
-    foodprinter.bestLoop(food);
+    // for(let prop in food){
+    //     food=food[prop];
+    // }
+    let someBuilder = "<table><tr>";
+    someBuilder+=foodprinter.printFood(food, someBuilder);
+    someBuilder += "</tr></table>";    
+    console.log(someBuilder);
+    outputBox.innerHTML = someBuilder;
+    // foodprinter.bestLoop(food);
 });
 newXHR.open("GET", "../scripts/dogfood.json");
 newXHR.send();
